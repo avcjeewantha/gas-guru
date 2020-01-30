@@ -1,6 +1,6 @@
 <base href="/">
 <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
-  <a class="navbar-brand active" routerLink="/">Gas Guru
+  <a class="navbar-brand" routerLink="/">Gas Guru
     <span class="sr-only">(current)</span>
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
@@ -10,22 +10,19 @@
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/about">About</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/contactUs">Contact us</a>
+<!--        <a class="nav-link" routerLink="/contactUs">Contact us</a>-->
       </li>
     </ul>
     <ul class="navbar-nav">
       <li *ngIf='isLoggedIn()' ngbDropdown class="nav-item dropdown">
-        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" aria-haspopup="true">{{authService.currentUsername}}</a>
+        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" aria-haspopup="true">{{authService.currentUserEmail}}</a>
         <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
           <a class="dropdown-item" (click)='navigateToPortal()'>My Portal</a>
           <a class="dropdown-item" (click)='logout()'>Logout</a>
         </div>
       </li>
       <li>
-        <button *ngIf='!isLoggedIn()' class='btn btn-outline-success my-2 my-sm-0' routerLink='/login'>Login</button>
+        <button *ngIf='!isLoggedIn()' class='btn btn-outline-secondary my-2 my-sm-0' routerLink='/login'>Login</button>
       </li>
     </ul>
   </div>

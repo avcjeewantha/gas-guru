@@ -15,10 +15,10 @@ export class BsNavbarComponent {
     return this.authService.isLoggedIn();
   }
   navigateToPortal() {
-    if (this.authService.currentUser.type === 'admin') {
-      this.router.navigate(['/portal/admin'], { queryParams: { category: 'addcount' } });
-    } else if (this.authService.currentUser.type === 'customer') {
-      this.router.navigate(['/portal/customer'], { queryParams: { category: 'vehiclequeue' } });
+    if (this.authService.currentUser.userType === 'admin') {
+      this.router.navigate(['/portal/admin'], { queryParams: { category: 'ahome' } });
+    } else if (this.authService.currentUser.userType === 'customer') {
+      this.router.navigate(['/portal/customer'], { queryParams: { category: 'chome' } });
     }
   }
 

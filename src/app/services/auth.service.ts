@@ -2,19 +2,21 @@ import {Injectable} from '@angular/core';
 import {map} from 'rxjs/operators';
 import {JwtHelper, tokenNotExpired} from 'angular2-jwt';
 import {HttpClient} from '@angular/common/http';
+import {environment} from '../../environments/environment';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Injectable()
 export class AuthService {
-
   result: any;
 
   constructor(private http: HttpClient
   ) { }
 
   login(credentials) {
-    return this.http.post('http://localhost:8080/users/login', credentials)
-      .pipe(map((response: Response)  => {
-        this.result = response.json();
+    return this.http.post(`${environment.apiUrl}/users/authenticate`, credentials)
+      .pipe(map(response => {
+        console.log(response);
+        this.result = response;
         if (this.result.error === 0 && this.result.token) {
           localStorage.setItem('token', this.result.token);
           return true;
@@ -51,6 +53,17 @@ export class AuthService {
     }
   }
 
+  get currentUserEmail() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return null;
+    } else {
+      const helper = new JwtHelperService();
+      const decodedToken = helper.decodeToken(token);
+      return decodedToken.email;
+    }
+  }
+
   get currentUserfname() {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -73,8 +86,8 @@ export class AuthService {
 
   get currentUser() {
     const token = localStorage.getItem('token');
-    const jwthelper = new JwtHelper();
-    return jwthelper.decodeToken(token).payload;
+    const helper = new JwtHelperService();
+    return helper.decodeToken(token);
   }
 
   register(data) {
