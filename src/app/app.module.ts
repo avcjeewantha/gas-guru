@@ -35,9 +35,9 @@ import { AccessDeniedComponent } from './components/access-denied/access-denied.
     RouterModule.forRoot([
       {path: '', component: GasGuruHomeComponent},
       {path: 'login', component: LoginComponent},
-      { path: 'portal/admin', component: AdminPortalComponent, canActivate: [AuthGuard, AdminAuthGuardService] },
-      { path: 'portal/customer', component: CustomerPortalComponent, canActivate: [AuthGuard, CustomerAuthGuardService] },
-      { path: 'accessdenied', component: AccessDeniedComponent }
+      {path: 'portal/admin', component: AdminPortalComponent, canActivate: [AuthGuard, AdminAuthGuardService]},
+      {path: 'portal/customer', component: CustomerPortalComponent, canActivate: [AuthGuard, CustomerAuthGuardService]},
+      {path: 'accessdenied', component: AccessDeniedComponent}
     ]),
     AppRoutingModule,
     HttpClientModule,

@@ -15,7 +15,6 @@ export class AuthService {
   login(credentials) {
     return this.http.post(`${environment.apiUrl}/users/authenticate`, credentials)
       .pipe(map(response => {
-        console.log(response);
         this.result = response;
         if (this.result.error === 0 && this.result.token) {
           localStorage.setItem('token', this.result.token);
@@ -64,13 +63,14 @@ export class AuthService {
     }
   }
 
-  get currentUserfname() {
+  get currentUserType() {
     const token = localStorage.getItem('token');
     if (!token) {
       return null;
     } else {
-      const jwthelper = new JwtHelper();
-      return jwthelper.decodeToken(token).payload.firstname;
+      const helper = new JwtHelperService();
+      const decodedToken = helper.decodeToken(token);
+      return decodedToken.userType;
     }
   }
 

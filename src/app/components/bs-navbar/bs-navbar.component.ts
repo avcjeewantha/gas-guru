@@ -1,5 +1,5 @@
-import { Router } from '@angular/router';
-import { Component } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Component} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 
 @Component({
@@ -8,8 +8,13 @@ import {AuthService} from '../../services/auth.service';
   styleUrls: ['./bs-navbar.component.css']
 })
 export class BsNavbarComponent {
+  category: string;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private authService: AuthService, private router: Router) {
+    route.queryParamMap.subscribe(params => {
+      this.category = params.get('category');
+    });
+  }
 
   isLoggedIn() {
     return this.authService.isLoggedIn();
@@ -25,5 +30,9 @@ export class BsNavbarComponent {
   logout() {
     this.authService.logout();
     this.router.navigate(['/']);
+  }
+
+  register() {
+
   }
 }
