@@ -3,6 +3,7 @@ import { HttpRequest, HttpResponse, HttpHandler, HttpInterceptor, HTTP_INTERCEPT
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 import {User} from '../_models/user';
+import {Locations} from '../_models/locations';
 
 const token1 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwidXN' +
   'lclR5cGUiOiJhZG1pbiIsImVycm9yIjowfQ.XCFyR2PeN9Z1uoEW6_ESCTXPUvCkRAca-_yYphOi8No';
@@ -16,6 +17,15 @@ const users: User[] = [
   { userId: 13, email: 'customer1@gmail.com', userType: 'customer', password: 'customer', token: token2 },
   { userId: 14, email: 'customer2@gmail.com', userType: 'customer', password: 'customer', token: token3 }
   ];
+
+const locations: Locations[] = [
+    {latitude: 6.989500, longitude: 81.055702},
+    {latitude: 6.982522, longitude: 81.058807},
+    {latitude: 6.998645, longitude: 81.057198},
+    {latitude: 6.934718, longitude: 81.155411 },
+    {latitude: 6.986600, longitude: 81.057503 },
+    {latitude: 6.960300, longitude: 81.035500 }
+];
 
 @Injectable()
 export class FakeBackend implements HttpInterceptor {
@@ -32,6 +42,8 @@ export class FakeBackend implements HttpInterceptor {
       switch (true) {
         case url.endsWith('/users/authenticate') && method === 'POST':
           return authenticate();
+        case url.endsWith('/admin/getLocationsAll') && method === 'GET':
+          return getLocationsAll();
         default: // pass through any requests not handled above
           return next.handle(request);
       }
@@ -72,6 +84,12 @@ export class FakeBackend implements HttpInterceptor {
 
     function isLoggedIn() {
       return headers.get('Authorization') === `Basic ${window.btoa('test:test')}`;
+    }
+
+    function getLocationsAll() {
+      return ok({
+        locations
+      });
     }
   }
 }

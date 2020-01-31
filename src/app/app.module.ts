@@ -18,6 +18,9 @@ import {AuthGuard} from './services/auth-guard.service';
 import {CustomerAuthGuardService} from './services/customer-auth-guard.service';
 import {AdminAuthGuardService} from './services/admin-auth-guard.service';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
+import {AgmCoreModule} from '@agm/core';
+import {environment} from '../environments/environment';
+import {DataService} from './services/data.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,7 @@ import { AccessDeniedComponent } from './components/access-denied/access-denied.
     CarouselComponent,
     AdminPortalComponent,
     CustomerPortalComponent,
-    AccessDeniedComponent,
+    AccessDeniedComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,9 @@ import { AccessDeniedComponent } from './components/access-denied/access-denied.
       {path: 'portal/customer', component: CustomerPortalComponent, canActivate: [AuthGuard, CustomerAuthGuardService]},
       {path: 'accessdenied', component: AccessDeniedComponent}
     ]),
+    AgmCoreModule.forRoot({
+      apiKey: environment.googleMapsKey
+    }),
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
@@ -50,7 +56,8 @@ import { AccessDeniedComponent } from './components/access-denied/access-denied.
     fakeBackendProvider,
     AdminAuthGuardService,
     CustomerAuthGuardService,
-    AuthGuard
+    AuthGuard,
+    DataService
   ],
   bootstrap: [AppComponent]
 })
