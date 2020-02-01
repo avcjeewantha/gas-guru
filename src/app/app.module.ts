@@ -10,7 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GasGuruHomeComponent } from './components/gas-guru-home/gas-guru-home.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import {RouterModule} from '@angular/router';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {fakeBackendProvider} from './_helpers/fake-backend';
 import { AdminPortalComponent } from './components/admin-portal/admin-portal.component';
 import { CustomerPortalComponent } from './components/customer-portal/customer-portal.component';
@@ -48,7 +48,8 @@ import {DataService} from './services/data.service';
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthService,

@@ -5,17 +5,17 @@ import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 import {User} from '../_models/user';
 import {Locations} from '../_models/locations';
 
-const token1 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwidXN' +
-  'lclR5cGUiOiJhZG1pbiIsImVycm9yIjowfQ.XCFyR2PeN9Z1uoEW6_ESCTXPUvCkRAca-_yYphOi8No';
-const token2 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMyIsImVtYWlsIjoiY3VzdG9tZXIxQGdtYWlsLmNvbSIs' +
-  'InVzZXJUeXBlIjoiY3VzdG9tZXIiLCJlcnJvciI6MH0.PMLkl9UQtxVjnuT7N8_CJKHY895MGW5AGT82tVpmMuU';
-const token3 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxNCIsImVtYWlsIjoiY3VzdG9tZXIyQGdtYWlsLmNvbSIsInVz' +
-  'ZXJUeXBlIjoiY3VzdG9tZXIiLCJlcnJvciI6MH0.s34r71Mtgtl5foXy7yjz4kKOlPFak8pz9xjBWXuVgIQ';
+const token1 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMiIsInVzZXJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkb' +
+  'WluQGdtYWlsLmNvbSIsInVzZXJUeXBlIjoiYWRtaW4iLCJlcnJvciI6MH0.KIdf5SjQgL4T40lYqBTvU67n14KaoeV479EOI8iiG4o';
+const token2 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMyIsInVzZXJuYW1lIjoiY3VzMSIsImVtYWlsIjoiY3VzdG' +
+  '9tZXIxQGdtYWlsLmNvbSIsInVzZXJUeXBlIjoiY3VzdG9tZXIiLCJlcnJvciI6MH0._98DWf4DzWdMaUTFTbQT5vhPbEKOyOp_f79eeOgvNjA';
+const token3 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxNCIsInVzZXJuYW1lIjoiY3VzMiIsImVtYWlsIjoiY3V' +
+  'zdG9tZXIyQGdtYWlsLmNvbSIsInVzZXJUeXBlIjoiY3VzdG9tZXIiLCJlcnJvciI6MH0.9_PVdTJQqBjbmLqhmKOZCN6DG6zjks5Ymikqrn0rcKQ';
 
 const users: User[] = [
-  { userId: 12, email: 'admin@gmail.com', userType: 'admin', password: 'admin', token: token1 },
-  { userId: 13, email: 'customer1@gmail.com', userType: 'customer', password: 'customer', token: token2 },
-  { userId: 14, email: 'customer2@gmail.com', userType: 'customer', password: 'customer', token: token3 }
+  { userId: 12, username: 'admin', email: 'admin@gmail.com', userType: 'admin', password: 'admin', token: token1 },
+  { userId: 13, username: 'cus1', email: 'customer1@gmail.com', userType: 'customer', password: 'customer', token: token2 },
+  { userId: 14, username: 'cus2', email: 'customer2@gmail.com', userType: 'customer', password: 'customer', token: token3 }
   ];
 
 const locations: Locations[] = [
@@ -30,7 +30,6 @@ const locations: Locations[] = [
 @Injectable()
 export class FakeBackend implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log(request);
     const { url, method, headers, body } = request;
     return of(null) // wrap in delayed observable to simulate server api call
     .pipe(mergeMap(handleRoute))
@@ -53,13 +52,14 @@ export class FakeBackend implements HttpInterceptor {
     }
 
     function authenticate() {
-      const { email, password } = body;
-      const user = users.find(x => x.email === email && x.password === password);
+      const { username, password } = body;
+      const user = users.find(x => x.username === username && x.password === password);
       if (!user) {
         return error('Username or password is incorrect');
       }
       return ok({
         userId: user.userId,
+        username: user.username,
         email: user.email,
         userType: user.userType,
         error: 0,

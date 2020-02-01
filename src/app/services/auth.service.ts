@@ -32,7 +32,7 @@ export class AuthService {
     return tokenNotExpired();
   }
 
-  get currentUsername() {
+  get currentUname() {
     const token = localStorage.getItem('token');
     if (!token) {
       return null;
@@ -42,13 +42,25 @@ export class AuthService {
     }
   }
 
+  get currentUsername() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return null;
+    } else {
+      const helper = new JwtHelperService();
+      const decodedToken = helper.decodeToken(token);
+      return decodedToken.username;
+    }
+  }
+
   get currentUserId() {
     const token = localStorage.getItem('token');
     if (!token) {
       return null;
     } else {
-      const jwthelper = new JwtHelper();
-      return jwthelper.decodeToken(token).payload.id;
+      const helper = new JwtHelperService();
+      const decodedToken = helper.decodeToken(token);
+      return decodedToken.userId;
     }
   }
 
@@ -91,7 +103,7 @@ export class AuthService {
   }
 
   register(data) {
-    return this.http.post('http://localhost:8080/api/newapplication', data).pipe(map(response => {
+    return this.http.post(`${environment.apiUrl}/api/newapplication`, data).pipe(map(response => {
       return !!response;
     }));
   }

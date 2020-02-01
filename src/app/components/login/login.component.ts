@@ -37,7 +37,7 @@ export class LoginComponent {
 
       } else {
         this.invalidLogin = true;
-        this.message = 'Invalid email or password';
+        this.message = 'Invalid username or password';
       }
     });
   }
