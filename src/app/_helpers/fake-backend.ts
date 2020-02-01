@@ -19,17 +19,18 @@ const users: User[] = [
   ];
 
 const locations: Locations[] = [
-    {latitude: 6.989500, longitude: 81.055702},
-    {latitude: 6.982522, longitude: 81.058807},
-    {latitude: 6.998645, longitude: 81.057198},
-    {latitude: 6.934718, longitude: 81.155411 },
-    {latitude: 6.986600, longitude: 81.057503 },
-    {latitude: 6.960300, longitude: 81.035500 }
+    {sId: 1, latitude: 6.989500, longitude: 81.055702, sName: 'IOC Filling Station- Badulla', vCount: 1},
+    {sId: 2, latitude: 6.982522, longitude: 81.058807, sName: 'Ceypetco Filling Station', vCount: 4},
+    {sId: 3, latitude: 6.998645, longitude: 81.057198, sName: 'Ceypetco filling station,Badulla', vCount: 5},
+    {sId: 4, latitude: 6.934718, longitude: 81.155411, sName: 'IOC filling station,Passara', vCount: 8},
+    {sId: 5, latitude: 6.986600, longitude: 81.057503, sName: 'Co-Op Fuel Station', vCount: 9},
+    {sId: 6, latitude: 6.960300, longitude: 81.035500, sName: 'IOC Filling Station - Haliela', vCount: 10}
 ];
 
 @Injectable()
 export class FakeBackend implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
+    console.log(request);
     const { url, method, headers, body } = request;
     return of(null) // wrap in delayed observable to simulate server api call
     .pipe(mergeMap(handleRoute))
@@ -44,6 +45,8 @@ export class FakeBackend implements HttpInterceptor {
           return authenticate();
         case url.endsWith('/admin/getLocationsAll') && method === 'GET':
           return getLocationsAll();
+        case url.endsWith('/admin/setlocation') && method === 'POST':
+          return setlocation();
         default: // pass through any requests not handled above
           return next.handle(request);
       }
@@ -91,6 +94,12 @@ export class FakeBackend implements HttpInterceptor {
         locations
       });
     }
+
+    function setlocation() {
+      const { sId, vCount } = body;
+      return of(new HttpResponse({ status: 200 }));
+    }
+
   }
 }
 

@@ -16,4 +16,12 @@ export class DataService {
     }));
   }
 
+  setlocation(sId: number, vCount: number) {
+    const data = { sId, vCount };
+    // console.log(data);
+    return this.http.post('http://localhost:4000/admin/setlocation', data).pipe(map(response => {
+      return response;
+    }));
+  }
+
 }

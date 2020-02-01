@@ -23,6 +23,7 @@
     "@angular/router": "^8.2.14",
     "@auth0/angular-jwt": "^3.0.1",
     "@ng-bootstrap/ng-bootstrap": "^5.2.1",
+    "@reactivex/rxjs": "^6.4.0",
     "angular2-jwt": "latest",
     "bootstrap": "^4.4.1",
     "rxjs": "~6.4.0",

@@ -1,9 +1,12 @@
-<div *ngIf="lat && lng">
+<div *ngIf="stations.length !== 0 && lat && lng">
   <agm-map [latitude]="lat" [longitude]="lng">
-    <agm-marker [latitude]="lat" [longitude]="lng">
+    <agm-marker *ngFor="let m of stations; let i = index"
+                [latitude]="m.latitude"
+                [longitude]="m.longitude">
       <agm-info-window>
-        <h3><strong>Howdy!</strong></h3>
-        <p>You are here!</p>
+                <h3><strong>{{m.sName}}</strong></h3>
+              count: <input class="foo" size="10" placeholder="Vehicle count" [(ngModel)]="m.vCount" (keyup)="onKey(m.sId, m.vCount)">
+              status: <input class="foo" size="15" [value]="[getStatus(m.vCount)]">
       </agm-info-window>
     </agm-marker>
   </agm-map>

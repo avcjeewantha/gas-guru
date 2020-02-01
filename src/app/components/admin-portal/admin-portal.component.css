@@ -1,3 +1,8 @@
 agm-map {
   height: 450px;
 }
+
+.foo {
+  padding: 0 0 0 0  !important;
+  margin: 0 0 0 7px  !important;
+}
