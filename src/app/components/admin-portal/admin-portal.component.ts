@@ -13,10 +13,6 @@ export class AdminPortalComponent implements OnInit {
   lng: number;
 
   constructor(private dataService: DataService) {
-    this.dataService.getLocationsAll().subscribe(response => {
-      this.staRes = response;
-      this.stations = this.staRes.locations;
-    });
   }
 
   ngOnInit() {
@@ -48,7 +44,12 @@ export class AdminPortalComponent implements OnInit {
   }
 
   onKey(sId: number, vCount: number) {
-    this.dataService.setlocation(sId, Number(vCount));
+    this.dataService.setlocation(sId, Number(vCount)).subscribe(response => {
+      this.dataService.getLocationsAll().subscribe(response1 => {
+        this.staRes = response1;
+        this.stations = this.staRes.locations;
+      });
+    });
   }
 
 }

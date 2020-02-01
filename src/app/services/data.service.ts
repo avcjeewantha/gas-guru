@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class DataService {
 
   constructor(private http: HttpClient) {
@@ -18,7 +16,7 @@ export class DataService {
 
   setlocation(sId: number, vCount: number) {
     const data = { sId, vCount };
-    // console.log(data);
+    console.log(data);
     return this.http.post('http://localhost:4000/admin/setlocation', data).pipe(map(response => {
       return response;
     }));

@@ -52,12 +52,12 @@ import {DataService} from './services/data.service';
   ],
   providers: [
     AuthService,
+    DataService,
     // provider used to create fake backend
     fakeBackendProvider,
     AdminAuthGuardService,
     CustomerAuthGuardService,
-    AuthGuard,
-    DataService
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
