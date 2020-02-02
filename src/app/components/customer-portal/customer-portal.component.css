@@ -4,7 +4,11 @@ agm-map {
 
 .section {
   background-color: #FFF;
-  padding: 30px;
-  text-align: center;
-  font-size: 35px;
+  height: 100px;
+  margin: 20px 0 0 600px
+}
+
+.foo {
+  padding: 0 0 0 0  !important;
+  margin: 0 0 0 7px  !important;
 }

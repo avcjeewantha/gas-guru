@@ -43,7 +43,11 @@ export class AdminPortalComponent implements OnInit {
     }
   }
 
-  onKey(sId: number, vCount: number) {
+  onKey(sId: number, vCount: string) {
+    if (vCount === null) {
+      vCount = '0';
+    }
+    console.log(vCount);
     this.dataService.setlocation(sId, Number(vCount)).subscribe(response => {
       this.dataService.getLocationsAll().subscribe(response1 => {
         this.staRes = response1;

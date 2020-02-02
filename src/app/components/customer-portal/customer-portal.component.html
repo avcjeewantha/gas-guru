@@ -1,18 +1,26 @@
 <div class="section">
-  <label>
-    <div class="control-section">
-
-    </div>
-  </label>
+  <mat-form-field>
+    <mat-label>Select fuel station</mat-label>
+    <mat-select [(ngModel)]="selectedStation" (selectionChange)="changeClient($event.value)">
+      <mat-option *ngFor="let station of stations" [value]="station">
+        {{station.sName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
-
 
 <div *ngIf="lat && lng">
   <agm-map [latitude]="lat" [longitude]="lng">
     <agm-marker [latitude]="lat" [longitude]="lng">
       <agm-info-window>
-        <h3><strong>Howdy!</strong></h3>
-        <p>You are here!</p>
+        <h3><strong>I'm here</strong></h3>
+      </agm-info-window>
+    </agm-marker>
+    <agm-marker *ngIf="selectedStation && set" [latitude]="selectedStation.latitude" [longitude]="selectedStation.longitude">
+      <agm-info-window>
+        <h3><strong>{{selectedStation.sName}}</strong></h3>
+        count: <input class="foo" size="10" [readOnly]=true placeholder="Vehicle count" [value]="selectedStation.vCount">
+        status: <input class="foo" size="15" [readOnly]=true [value]="[getStatus(selectedStation.vCount)]">
       </agm-info-window>
     </agm-marker>
   </agm-map>

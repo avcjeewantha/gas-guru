@@ -21,6 +21,8 @@ import { AccessDeniedComponent } from './components/access-denied/access-denied.
 import {AgmCoreModule} from '@agm/core';
 import {environment} from '../environments/environment';
 import {DataService} from './services/data.service';
+import {MatSelectModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import {DataService} from './services/data.service';
     HttpClientModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthService,
