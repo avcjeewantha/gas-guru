@@ -1,6 +1,8 @@
 import {ActivatedRoute, Router} from '@angular/router';
 import {Component} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
+import {RegistrationFormComponent} from '../registration-form/registration-form.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-bs-navbar',
@@ -9,11 +11,13 @@ import {AuthService} from '../../services/auth.service';
 })
 export class BsNavbarComponent {
   category: string;
+  dialogOpened: boolean;
 
-  constructor(private route: ActivatedRoute, private authService: AuthService, private router: Router) {
+  constructor(private route: ActivatedRoute, private authService: AuthService, private router: Router, public dialog: MatDialog) {
     route.queryParamMap.subscribe(params => {
       this.category = params.get('category');
     });
+    this.dialogOpened = true;
   }
 
   isLoggedIn() {
@@ -32,7 +36,20 @@ export class BsNavbarComponent {
     this.router.navigate(['/']);
   }
 
-  register() {
-
+  openRegisterForm() {
+    this.openDialog();
   }
+
+  openDialog(): void {
+    this.dialogOpened = false;
+    const dialogRef = this.dialog.open(RegistrationFormComponent, {
+      width: '1000px',
+      height: '530px',
+      data: { title: 'Registration form' }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.dialogOpened = true;
+    });
+  }
+
 }

@@ -1,0 +1,201 @@
+<div class="card m-3">
+  <h5 class="card-header">{{data.title}}</h5>
+  <div class="card-body">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+
+
+
+      <div class="form-row">
+
+        <div class="form-group col">
+          <label>Full Name</label>
+          <input type="text" formControlName="fullName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }" />
+          <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
+            <div *ngIf="f.fullName.errors.required">Full Name is required</div>
+          </div>
+        </div>
+
+        <div class="form-group col">
+          <label>Email</label>
+          <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+
+      <div class="form-group">
+        <label>Address</label>
+        <input type="text" formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
+        <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+          <div *ngIf="f.address.errors.required">Address is required</div>
+        </div>
+      </div>
+
+      <div class="form-row">
+
+        <div class="form-group col-4">
+          <label class="control-label">Birthday</label>
+          <div class="col-sm-10 fix1">
+            <div class="input-group">
+              <input class="form-control" readonly='true'  formControlName="dateOfBirth" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                  <img src="../../../assets/date.png" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                </button>
+              </div>
+              <div *ngIf="submitted && f.dateOfBirth.errors" class="invalid-feedback">
+                <div *ngIf="f.dateOfBirth.errors.required">Birthday is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-4">
+          <label>NIC</label>
+          <input type="text" formControlName="nic" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nic.errors }" />
+          <div *ngIf="submitted && f.nic.errors" class="invalid-feedback">
+            <div *ngIf="f.nic.errors.required">NIC is required</div>
+          </div>
+        </div>
+
+        <div class="form-group col-4">
+          <label>Tel.No.</label>
+          <input type="Number" formControlName="telNo" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.telNo.errors }" />
+          <div *ngIf="submitted && f.telNo.errors" class="invalid-feedback">
+            <div *ngIf="f.telNo.errors.required">Tel.No. is required</div>
+            <div *ngIf="f.telNo.errors.pattern && !f.telNo.errors.required">Tel.No. is incorrect</div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+
+
+      <div class="form-row">
+
+        <div class="row mb-3 col">
+          <div class="col-2 col-md-2 d-flex align-items-center">
+            <label>Photo of customer</label>
+          </div>
+          <div class="col-3">
+            <img class="form-control no-radius font-x-large h1" src="{{imageUrl1}}" onerror="this.onerror=null;" alt="">
+          </div>
+          <div class="col-2">
+            <input formControlName="tempPhoto" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.tempPhoto.errors }" type="file" accept=".png,.jpg,.jpeg,.gif" style="display: none" #file1 (change)="fileChange($event, 1)"/>
+            <button type="button" class="btn h2 btn-secondary" (click)="file1.click()" >
+              Browse
+            </button>
+            <div *ngIf="submitted && f.tempPhoto.errors" class="invalid-feedback">
+              <div *ngIf="f.tempPhoto.errors.required">Image is required</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3 col">
+          <div class="col-2 col-md-2 d-flex align-items-center">
+            <label>Photo of vehicle</label>
+          </div>
+          <div class="col-3">
+            <img class="form-control no-radius font-x-large h1" src="{{imageUrl2}}" onerror="this.onerror=null;" alt="">
+          </div>
+          <div class="col-2">
+            <input formControlName="tempPhotoOfVehicle" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.tempPhotoOfVehicle.errors }" type="file" accept=".png,.jpg,.jpeg,.gif" style="display: none" #file2 (change)="fileChange($event, 2)"/>
+            <button type="button" class="btn h2 btn-secondary" (click)="file2.click()">
+              Browse
+            </button>
+            <div *ngIf="submitted && f.tempPhotoOfVehicle.errors" class="invalid-feedback">
+              <div *ngIf="f.tempPhotoOfVehicle.errors.required">Image is required</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+
+      <div class="form-row">
+
+        <div class="form-group col-4">
+          <label>Type of Vehicle</label>
+          <input type="text" formControlName="typeOfVehicle" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.typeOfVehicle.errors }" />
+          <div *ngIf="submitted && f.typeOfVehicle.errors" class="invalid-feedback">
+            <div *ngIf="f.typeOfVehicle.errors.required">Type of vehicle is required</div>
+          </div>
+        </div>
+
+        <div class="form-group col-4">
+          <label>Model of Vehicle</label>
+          <input type="text" formControlName="modleOfVehicle" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.modleOfVehicle.errors }" />
+          <div *ngIf="submitted && f.modleOfVehicle.errors" class="invalid-feedback">
+            <div *ngIf="f.modleOfVehicle.errors.required">Model of vehicle is required</div>
+          </div>
+        </div>
+
+        <div class="form-group col-4">
+          <label>Colour of Vehicle</label>
+          <input formControlName="colorOfVehicle" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.colorOfVehicle.errors }" type="color"
+                 id="color-picker-link"
+                 (ngModelChange)="setColor($event)"
+                 [ngModel]="linkColor">
+        </div>
+
+      </div>
+
+
+
+
+      <div class="form-row">
+
+        <div class="form-group col-4">
+          <label>Username</label>
+          <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required">Username is required</div>
+          </div>
+        </div>
+
+        <div class="form-group col-4">
+          <label>Password</label>
+          <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+          </div>
+        </div>
+
+        <div class="form-group col-4">
+          <label>Confirm Password</label>
+          <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+          <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+            <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+            <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary mr-1">Register</button>
+        <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+      </div>
+
+
+
+    </form>
+  </div>
+</div>

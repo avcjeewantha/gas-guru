@@ -1,0 +1,30 @@
+.fix1{
+  padding-left: 0 !important;
+}
+
+.mandatory:after {
+  content:" * ";
+}
+
+.right-aligned{
+  text-align: right;
+}
+
+.w-99{
+  width: 99%;
+}
+
+.scroll {
+  max-height: 591px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.h1{
+  height: 200px;
+  width: 200px;
+}
+
+.h2{
+  margin: 84px 0 0 96px;
+}

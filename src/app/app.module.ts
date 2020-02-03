@@ -21,8 +21,9 @@ import { AccessDeniedComponent } from './components/access-denied/access-denied.
 import {AgmCoreModule} from '@agm/core';
 import {environment} from '../environments/environment';
 import {DataService} from './services/data.service';
-import {MatSelectModule} from '@angular/material';
+import {MatDialogModule, MatSelectModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     CarouselComponent,
     AdminPortalComponent,
     CustomerPortalComponent,
-    AccessDeniedComponent
+    AccessDeniedComponent,
+    RegistrationFormComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    RegistrationFormComponent
   ],
   providers: [
     AuthService,

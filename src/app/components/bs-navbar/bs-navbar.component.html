@@ -13,23 +13,23 @@
           <a class="nav-link" routerLink="/about">Customers</a>
         </li>
         <li *ngIf='isLoggedIn() && authService.currentUserType === "admin"' class="nav-item">
-          <a class="nav-link" routerLink="/careers">Feedbacks</a>
+          <a class="nav-link" routerLink="/feedback">Feedbacks</a>
         </li>
         <li *ngIf='isLoggedIn() && authService.currentUserType === "customer"' class="nav-item">
-          <a class="nav-link" routerLink="/careers">Add Feedback</a>
+          <a class="nav-link" routerLink="/addFeedback">Add Feedback</a>
         </li>
       </ul>
     <ul class="navbar-nav">
       <li *ngIf='isLoggedIn()' ngbDropdown class="nav-item dropdown">
-        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" aria-haspopup="true">{{authService.currentUsername}}</a>
+        <a ngbDropdownToggle class="nav-link dropdown-toggle mar" id="dropdown01" aria-haspopup="true">{{authService.currentUsername}}</a>
         <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
           <a class="dropdown-item" (click)='navigateToPortal()'>My Portal</a>
           <a class="dropdown-item" (click)='logout()'>Logout</a>
         </div>
       </li>
       <div class="btn-toolbar">
-          <button *ngIf='!isLoggedIn()' class='btn btn-outline-secondary button' (click)='register()'>Register</button>
-          <button *ngIf='!isLoggedIn()' class='btn btn-outline-secondary button' routerLink='/login'>Login</button>
+          <button *ngIf='!isLoggedIn() && this.dialogOpened' class='btn btn-outline-secondary button' (click)='openRegisterForm()'>Register</button>
+          <button *ngIf='!isLoggedIn() && this.dialogOpened' class='btn btn-outline-secondary button' routerLink='/login'>Login</button>
       </div>
     </ul>
   </div>

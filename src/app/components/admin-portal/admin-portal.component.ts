@@ -24,8 +24,7 @@ export class AdminPortalComponent implements OnInit {
   }
 
   private getUserLocation() {
-    /// locate the user
-    if (navigator.geolocation) {
+    if (navigator.geolocation) {   // locate the user
       navigator.geolocation.getCurrentPosition(position => {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
@@ -47,7 +46,6 @@ export class AdminPortalComponent implements OnInit {
     if (vCount === null) {
       vCount = '0';
     }
-    console.log(vCount);
     this.dataService.setlocation(sId, Number(vCount)).subscribe(response => {
       this.dataService.getLocationsAll().subscribe(response1 => {
         this.staRes = response1;
