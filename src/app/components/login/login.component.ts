@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import {NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private authservice: AuthService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private dateparser: NgbDateParserFormatter) {
     this.invalidLogin = false;
     const returnurl = this.route.snapshot.queryParamMap.get('returnUrl');
     if (returnurl) {

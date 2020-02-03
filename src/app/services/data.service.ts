@@ -27,4 +27,10 @@ export class DataService {
     }));
   }
 
+  getMydetails(userId) {
+    return this.http.post(`${environment.apiUrl}/customer/getMyDetails`, userId).pipe(map(response => {
+      return response;
+    }));
+  }
+
 }

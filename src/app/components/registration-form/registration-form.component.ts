@@ -20,11 +20,75 @@ export class RegistrationFormComponent implements OnInit {
   public linkColor: string;
   public res: any;
   public dob: any;
+  public isViewOnly: boolean;
+  public isEdit: boolean;
+  public customer: any;
+  public new: boolean;
+
+
 
   constructor(private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any,
               public dataService: DataService, private dateparser: NgbDateParserFormatter,
               public dialogRef: MatDialogRef<RegistrationFormComponent>) {
     this.linkColor = '#0000ff';
+    this.new = false;
+
+    if (data) {
+      this.new = this.data.isnew;
+      this.isViewOnly = this.data.isViewOnly;
+      this.isEdit = this.data.isEditMode;
+
+      if (!this.new) {
+        this.dataService.getMydetails(this.data.customerId).subscribe(response => {
+          this.res = response;
+          this.customer = this.res;
+          console.log(this.customer);
+          if (this.isViewOnly || this.isEdit) {
+            this.registerForm = this.formBuilder.group({
+              fullname: [this.customer.fullname],
+              email: [this.customer.email],
+              address: [this.customer.address],
+              tempDateOfBirth: [this.customer.dateOfBirth],
+              dateOfBirth: [this.customer.dateOfBirth],
+              nic: [this.customer.nic],
+              telNo: [this.customer.telNo],
+              tempPhoto: [this.customer.photo],
+              // photo: [this.customer.photo],
+              tempPhotoOfVehicle: [this.customer.photoOfVehicle],
+              // photoOfVehicle: [this.customer.photoOfVehicle],
+              typeOfVehicle: [this.customer.typeOfVehicle],
+              modleOfVehicle: [this.customer.modleOfVehicle],
+              colorOfVehicle: [this.customer.colorOfVehicle],
+              username: [this.customer.username],
+              password: '',
+              confirmPassword: '',
+            });
+            this.model = this.f.dateOfBirth.value;
+          }
+        });
+      } else {
+        this.registerForm = this.formBuilder.group({
+          fullname: [],
+          email: [],
+          address: [],
+          tempDateOfBirth: [],
+          // dateOfBirth: [],
+          nic: [],
+          telNo: [],
+          tempPhoto: [],
+          // photo: [],
+          tempPhotoOfVehicle: [],
+          // photoOfVehicle: [],
+          typeOfVehicle: [],
+          modleOfVehicle: [],
+          colorOfVehicle: [],
+          username: [],
+          password: [],
+          confirmPassword: [],
+        });
+      }
+
+    }
   }
 
   get f() { return this.registerForm.controls; } // convenience getter for easy access to form fields
@@ -65,15 +129,15 @@ export class RegistrationFormComponent implements OnInit {
     this.registerForm.controls.photoOfVehicle.setValue(this.imageUrl2);
     this.registerForm.controls.dateOfBirth.setValue(this.dob);
     console.log(this.registerForm.value);
-    this.dataService.register(this.registerForm.value).subscribe(response => {
-      this.res = response;
-      if (this.res.status === 200) {
-        alert('Successfully Registered!');
-        this.close();
-      } else {
-        alert('Error in Registering!');
-      }
-    });
+    // this.dataService.register(this.registerForm.value).subscribe(response => {
+    //   this.res = response;
+    //   if (this.res.status === 200) {
+    //     alert('Successfully Registered!');
+    //     this.close();
+    //   } else {
+    //     alert('Error in Registering!');
+    //   }
+    // });
   }
 
   onReset() {

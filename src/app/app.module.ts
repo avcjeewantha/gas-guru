@@ -21,9 +21,10 @@ import { AccessDeniedComponent } from './components/access-denied/access-denied.
 import {AgmCoreModule} from '@agm/core';
 import {environment} from '../environments/environment';
 import {DataService} from './services/data.service';
-import {MatDialogModule, MatSelectModule} from '@angular/material';
+import {MatCardModule, MatDialogModule, MatSelectModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
+import { CustomerListComponent } from './components/customer-list/customer-list.component';
 
 @NgModule({
   declarations: [
@@ -35,13 +36,15 @@ import { RegistrationFormComponent } from './components/registration-form/regist
     AdminPortalComponent,
     CustomerPortalComponent,
     AccessDeniedComponent,
-    RegistrationFormComponent
+    RegistrationFormComponent,
+    CustomerListComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
       {path: '', component: GasGuruHomeComponent},
       {path: 'login', component: LoginComponent},
+      {path: 'customerList', component: CustomerListComponent, canActivate: [AuthGuard, AdminAuthGuardService]},
       {path: 'portal/admin', component: AdminPortalComponent, canActivate: [AuthGuard, AdminAuthGuardService]},
       {path: 'portal/customer', component: CustomerPortalComponent, canActivate: [AuthGuard, CustomerAuthGuardService]},
       {path: 'accessdenied', component: AccessDeniedComponent}
@@ -56,7 +59,8 @@ import { RegistrationFormComponent } from './components/registration-form/regist
     ReactiveFormsModule,
     MatSelectModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCardModule
   ],
   entryComponents: [
     RegistrationFormComponent
