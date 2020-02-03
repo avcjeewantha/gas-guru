@@ -26,6 +26,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { CustomerDetailsComponent } from './components/customer-details/customer-details.component';
+import { FeedBackComponent } from './components/feed-back/feed-back.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { CustomerDetailsComponent } from './components/customer-details/customer
     AccessDeniedComponent,
     RegistrationFormComponent,
     CustomerListComponent,
-    CustomerDetailsComponent
+    CustomerDetailsComponent,
+    FeedBackComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +68,8 @@ import { CustomerDetailsComponent } from './components/customer-details/customer
   ],
   entryComponents: [
     RegistrationFormComponent,
-    CustomerDetailsComponent
+    CustomerDetailsComponent,
+    FeedBackComponent
   ],
   providers: [
     AuthService,

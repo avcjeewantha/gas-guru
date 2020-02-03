@@ -5,3 +5,11 @@
 .mar{
   margin-right: 27px;
 }
+
+.button1 {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  overflow: hidden;
+  outline:none;
+}

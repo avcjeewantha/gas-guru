@@ -4,6 +4,7 @@ import {AuthService} from '../../services/auth.service';
 import {RegistrationFormComponent} from '../registration-form/registration-form.component';
 import {MatDialog} from '@angular/material';
 import {Customer} from '../../_models/customers';
+import {FeedBackComponent} from '../feed-back/feed-back.component';
 
 @Component({
   selector: 'app-bs-navbar',
@@ -54,12 +55,10 @@ export class BsNavbarComponent {
     });
   }
 
-  editProfile(id: string) {
+  addFeedBack() {
     this.dialogOpened = false;
-    const dialogRef = this.dialog.open(RegistrationFormComponent, {
-      width: '1000px',
-      height: '530px',
-      data: { title: 'Edit Profile', button: 'Save', customerId: Number(id), isViewOnly: false, isEditMode: true, isnew: false}
+    const dialogRef = this.dialog.open(FeedBackComponent, {
+      width: '700px'
     });
     dialogRef.afterClosed().subscribe(result => {
       this.dialogOpened = true;

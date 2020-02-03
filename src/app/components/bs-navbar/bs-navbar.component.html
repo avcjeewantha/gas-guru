@@ -16,7 +16,7 @@
 <!--          <a class="nav-link" routerLink="/feedback">Feedbacks</a>-->
         </li>
         <li *ngIf='isLoggedIn() && authService.currentUserType === "customer"' class="nav-item">
-<!--          <a class="nav-link" routerLink="/addFeedback">Add Feedback</a>-->
+          <button class="button1" (click)=addFeedBack()>Add Feedback</button>
         </li>
       </ul>
     <ul class="navbar-nav">

@@ -39,4 +39,12 @@ export class DataService {
     }));
   }
 
+  sendFeedback(feedback: string, userId: number) {
+    return this.http.post(`${environment.apiUrl}/users/addFeedBack`, [userId, feedback])
+      .pipe(map(response => {
+        return response;
+        }
+      ));
+  }
+
 }
