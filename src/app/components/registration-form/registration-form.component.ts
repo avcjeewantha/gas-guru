@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MustMatch} from '../../_helpers/must-match.validator';
-import {MAT_DIALOG_DATA} from '@angular/material';
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {DataService} from '../../services/data.service';
 
 @Component({
@@ -19,8 +19,11 @@ export class RegistrationFormComponent implements OnInit {
   public imagefile: File;
   public linkColor: string;
   public res: any;
+  public dob: any;
 
-  constructor(private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, public dataService: DataService) {
+  constructor(private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any,
+              public dataService: DataService, private dateparser: NgbDateParserFormatter,
+              public dialogRef: MatDialogRef<RegistrationFormComponent>) {
     this.linkColor = '#0000ff';
   }
 
@@ -28,10 +31,11 @@ export class RegistrationFormComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      fullName: ['', Validators.required],
+      fullname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required],
-      dateOfBirth: ['', Validators.required],
+      tempDateOfBirth: ['', Validators.required],
+      dateOfBirth: this.dob,
       nic: ['', Validators.required],
       telNo: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       tempPhoto: ['', Validators.required],
@@ -50,17 +54,22 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.registerForm.controls.tempDateOfBirth.value !== '') {
+      this.dob = this.dateparser.format(this.registerForm.controls.tempDateOfBirth.value);
+    }
     this.submitted = true;
     if (this.registerForm.invalid) {    // stop here if form is invalid
       return;
     }
     this.registerForm.controls.photo.setValue(this.imageUrl1);
     this.registerForm.controls.photoOfVehicle.setValue(this.imageUrl2);
+    this.registerForm.controls.dateOfBirth.setValue(this.dob);
     console.log(this.registerForm.value);
     this.dataService.register(this.registerForm.value).subscribe(response => {
       this.res = response;
       if (this.res.status === 200) {
         alert('Successfully Registered!');
+        this.close();
       } else {
         alert('Error in Registering!');
       }
@@ -105,6 +114,10 @@ export class RegistrationFormComponent implements OnInit {
 
   setColor(newColor) {
     this.linkColor = newColor;
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 
 }
