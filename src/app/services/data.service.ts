@@ -33,4 +33,10 @@ export class DataService {
     }));
   }
 
+  getNameList() {
+    return this.http.get(`${environment.apiUrl}/admin/getCustomerList`).pipe(map(response => {
+      return response;
+    }));
+  }
+
 }

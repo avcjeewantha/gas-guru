@@ -68,6 +68,8 @@ export class FakeBackend implements HttpInterceptor {
           return setlocation();
         case url.endsWith('/customer/getMyDetails') && method === 'POST':
           return getMyDetails();
+        case url.endsWith('/admin/getCustomerList') && method === 'GET':
+          return getCustomerNames();
         default: // pass through any requests not handled above
           return next.handle(request);
       }
@@ -139,6 +141,21 @@ export class FakeBackend implements HttpInterceptor {
         photo: customer.photo,
         photoOfVehicle: customer.photoOfVehicle,
         username: customer.username,
+      });
+    }
+
+    function getCustomerNames() {
+      const cusList = [];
+      for (const customer of customers) {
+        cusList.push(
+          {
+            userId: customer.userId,
+            fullname: customer.fullname
+          }
+        );
+      }
+      return ok({
+        cusList
       });
     }
 

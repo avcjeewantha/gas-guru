@@ -1,1 +1,13 @@
-<mat-card>Simple card</mat-card>
+<mat-card *ngFor="let customer of customers">
+  <div class="row">
+    <div class="col-4">
+      {{customer.userId}}
+    </div>
+    <div class="col-4">
+      {{customer.fullname}}
+    </div>
+    <div class="col-4">
+      <button class="btn btn-secondary" (click)="showDetails()">View Details</button>
+    </div>
+  </div>
+</mat-card>
