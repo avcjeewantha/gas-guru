@@ -1,5 +1,7 @@
 import { Component} from '@angular/core';
 import {DataService} from '../../services/data.service';
+import {MatDialog} from '@angular/material';
+import {CustomerDetailsComponent} from '../customer-details/customer-details.component';
 
 @Component({
   selector: 'app-customer-list',
@@ -9,12 +11,24 @@ import {DataService} from '../../services/data.service';
 
 export class CustomerListComponent {
   public staRes: any;
+  public details: any;
   public customers: any;
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, public dialog: MatDialog) {
     this.dataService.getNameList().subscribe(response => {
         this.staRes = response;
         this.customers = this.staRes.cusList;
+    });
+  }
+
+  showDetails(userId: number) {
+    this.dataService.getMydetails(userId).subscribe(response => {
+      this.details = response;
+      const dialogRef = this.dialog.open(CustomerDetailsComponent, {
+        width: '1000px',
+        height: '530px',
+        data: { title: 'Details', isViewOnly: true, isEditMode: false, isnew: false, customerEntity: this.details}
+      });
     });
   }
 

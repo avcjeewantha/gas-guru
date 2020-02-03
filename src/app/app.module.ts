@@ -25,6 +25,7 @@ import {MatCardModule, MatDialogModule, MatSelectModule} from '@angular/material
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
+import { CustomerDetailsComponent } from './components/customer-details/customer-details.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CustomerListComponent } from './components/customer-list/customer-list.
     CustomerPortalComponent,
     AccessDeniedComponent,
     RegistrationFormComponent,
-    CustomerListComponent
+    CustomerListComponent,
+    CustomerDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +65,8 @@ import { CustomerListComponent } from './components/customer-list/customer-list.
     MatCardModule
   ],
   entryComponents: [
-    RegistrationFormComponent
+    RegistrationFormComponent,
+    CustomerDetailsComponent
   ],
   providers: [
     AuthService,

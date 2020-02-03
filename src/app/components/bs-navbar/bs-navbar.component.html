@@ -13,10 +13,10 @@
           <a class="nav-link" routerLink="/customerList">Customers</a>
         </li>
         <li *ngIf='isLoggedIn() && authService.currentUserType === "admin"' class="nav-item">
-          <a class="nav-link" routerLink="/feedback">Feedbacks</a>
+<!--          <a class="nav-link" routerLink="/feedback">Feedbacks</a>-->
         </li>
         <li *ngIf='isLoggedIn() && authService.currentUserType === "customer"' class="nav-item">
-          <a class="nav-link" routerLink="/addFeedback">Add Feedback</a>
+<!--          <a class="nav-link" routerLink="/addFeedback">Add Feedback</a>-->
         </li>
       </ul>
     <ul class="navbar-nav">
