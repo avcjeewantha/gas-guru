@@ -47,4 +47,10 @@ export class DataService {
       ));
   }
 
+  getFeedbackList() {
+    return this.http.get(`${environment.apiUrl}/admin/getFeedbackList`).pipe(map(response => {
+      return response;
+    }));
+  }
+
 }

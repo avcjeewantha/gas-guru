@@ -5,6 +5,7 @@ import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 import {User} from '../_models/user';
 import {Locations} from '../_models/locations';
 import {Customer} from '../_models/customers';
+import {FeedBack} from '../_models/feedbacks';
 
 const token1 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMiIsInVzZXJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkb' +
   'WluQGdtYWlsLmNvbSIsInVzZXJUeXBlIjoiYWRtaW4iLCJlcnJvciI6MH0.KIdf5SjQgL4T40lYqBTvU67n14KaoeV479EOI8iiG4o';
@@ -26,6 +27,11 @@ const locations: Locations[] = [
     {sId: 4, latitude: 6.934718, longitude: 81.155411, sName: 'IOC filling station,Passara', vCount: 8},
     {sId: 5, latitude: 6.986600, longitude: 81.057503, sName: 'Co-Op Fuel Station', vCount: 9},
     {sId: 6, latitude: 6.960300, longitude: 81.035500, sName: 'IOC Filling Station - Haliela', vCount: 10}
+];
+
+const feedbacks: FeedBack[] = [
+  {userId: 12, feedback: 'ererwerewerwerwerwerwerwerewrew'},
+  {userId: 13, feedback: 'sfsdfdsfsdfsdsrhfgjfyjyjtyj'}
 ];
 
 const customers: Customer[] = [
@@ -70,6 +76,8 @@ export class FakeBackend implements HttpInterceptor {
           return getMyDetails();
         case url.endsWith('/admin/getCustomerList') && method === 'GET':
           return getCustomerNames();
+        case url.endsWith('/admin/getFeedbackList') && method === 'GET':
+          return getFeedBacks();
         default: // pass through any requests not handled above
           return next.handle(request);
       }
@@ -159,6 +167,21 @@ export class FakeBackend implements HttpInterceptor {
       }
       return ok({
         cusList
+      });
+    }
+
+    function getFeedBacks() {
+      const feedbackList = [];
+      for (const feedback of feedbacks) {
+        feedbackList.push(
+          {
+            userId: feedback.userId,
+            feedback: feedback.feedback
+          }
+        );
+      }
+      return ok({
+        feedbackList
       });
     }
 

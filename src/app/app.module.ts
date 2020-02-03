@@ -27,6 +27,7 @@ import { RegistrationFormComponent } from './components/registration-form/regist
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { CustomerDetailsComponent } from './components/customer-details/customer-details.component';
 import { FeedBackComponent } from './components/feed-back/feed-back.component';
+import { FeedbackListComponent } from './components/feedback-list/feedback-list.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { FeedBackComponent } from './components/feed-back/feed-back.component';
     RegistrationFormComponent,
     CustomerListComponent,
     CustomerDetailsComponent,
-    FeedBackComponent
+    FeedBackComponent,
+    FeedbackListComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +51,7 @@ import { FeedBackComponent } from './components/feed-back/feed-back.component';
       {path: '', component: GasGuruHomeComponent},
       {path: 'login', component: LoginComponent},
       {path: 'customerList', component: CustomerListComponent, canActivate: [AuthGuard, AdminAuthGuardService]},
+      {path: 'feedback', component: FeedbackListComponent, canActivate: [AuthGuard, AdminAuthGuardService]},
       {path: 'portal/admin', component: AdminPortalComponent, canActivate: [AuthGuard, AdminAuthGuardService]},
       {path: 'portal/customer', component: CustomerPortalComponent, canActivate: [AuthGuard, CustomerAuthGuardService]},
       {path: 'accessdenied', component: AccessDeniedComponent}

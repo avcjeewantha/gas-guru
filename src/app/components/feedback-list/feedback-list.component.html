@@ -1,0 +1,11 @@
+<div class="card">
+  <div class="card-header">
+    Feedbacks
+  </div>
+  <div *ngFor="let feedback of feedbacks" class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>User Id: {{feedback.userId}}</p>
+      <footer class="blockquote-footer">{{feedback.feedback}}</footer>
+    </blockquote>
+  </div>
+</div>
