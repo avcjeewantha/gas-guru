@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MustMatch} from '../../_helpers/must-match.validator';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateParserFormatter, NgbDatepickerConfig, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {DataService} from '../../services/data.service';
 
 @Component({
@@ -29,9 +29,13 @@ export class RegistrationFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any,
               public dataService: DataService, private dateparser: NgbDateParserFormatter,
-              public dialogRef: MatDialogRef<RegistrationFormComponent>) {
+              public dialogRef: MatDialogRef<RegistrationFormComponent>, private config: NgbDatepickerConfig) {
     this.linkColor = '#0000ff';
     this.new = false;
+    const current = new Date();
+    config.maxDate = { year: current.getFullYear(), month:
+        current.getMonth() + 1, day: current.getDate() };
+    config.outsideDays = 'hidden';
 
     if (data) {
       this.new = this.data.isnew;
