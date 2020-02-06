@@ -1,4 +1,4 @@
 export class FeedBack {
-  userId: number;
+  username: string;
   feedback: string;
 }

@@ -1,7 +1,7 @@
 <mat-card>
   <div class="row">
     <div class="col-4">
-      Customer Id
+      Username
     </div>
     <div class="col-4">
       Name
@@ -11,13 +11,13 @@
 <mat-card *ngFor="let customer of customers">
   <div class="row">
     <div class="col-4">
-      {{customer.userId}}
+      {{customer.username}}
     </div>
     <div class="col-4">
       {{customer.fullname}}
     </div>
     <div class="col-4">
-      <button class="btn btn-secondary" (click)="showDetails(customer.userId)">View Details</button>
+      <button class="btn btn-secondary" (click)="showDetails(customer.username)">View Details</button>
     </div>
   </div>
 </mat-card>

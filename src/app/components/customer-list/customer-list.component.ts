@@ -21,8 +21,8 @@ export class CustomerListComponent {
     });
   }
 
-  showDetails(userId: number) {
-    this.dataService.getMydetails(userId).subscribe(response => {
+  showDetails(username: string) {
+    this.dataService.getMydetails(username).subscribe(response => {
       this.details = response;
       const dialogRef = this.dialog.open(CustomerDetailsComponent, {
         width: '1000px',
