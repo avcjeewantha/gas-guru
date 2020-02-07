@@ -3,7 +3,7 @@
     <mat-label>Select fuel station</mat-label>
     <mat-select [(ngModel)]="selectedStation" (selectionChange)="changeClient($event.value)">
       <mat-option *ngFor="let station of stations" [value]="station">
-        {{station.sName}}
+        {{station.stationName}}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -18,9 +18,9 @@
     </agm-marker>
     <agm-marker *ngIf="selectedStation && set" [latitude]="selectedStation.latitude" [longitude]="selectedStation.longitude">
       <agm-info-window>
-        <h3><strong>{{selectedStation.sName}}</strong></h3>
-        count: <input class="foo" size="10" [readOnly]=true placeholder="Vehicle count" [value]="selectedStation.vCount">
-        status: <input class="foo" size="15" [readOnly]=true [value]="[getStatus(selectedStation.vCount)]">
+        <h3><strong>{{selectedStation.stationName}}</strong></h3>
+        count: <input class="foo" size="10" [readOnly]=true placeholder="Vehicle count" [value]="selectedStation.vehicleCount">
+        status: <input class="foo" size="15" [readOnly]=true [value]="[getStatus(selectedStation.vehicleCount)]">
       </agm-info-window>
     </agm-marker>
   </agm-map>

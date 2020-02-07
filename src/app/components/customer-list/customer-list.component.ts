@@ -17,7 +17,7 @@ export class CustomerListComponent {
   constructor(private dataService: DataService, public dialog: MatDialog) {
     this.dataService.getNameList().subscribe(response => {
         this.staRes = response;
-        this.customers = this.staRes.cusList;
+        this.customers = this.staRes;
     });
   }
 

@@ -19,7 +19,8 @@ export class AdminPortalComponent implements OnInit {
     this.getUserLocation();
     this.dataService.getLocationsAll().subscribe(response => {
       this.staRes = response;
-      this.stations = this.staRes.locations;
+      this.stations = this.staRes;
+      console.log(this.stations);
     });
   }
 
@@ -49,7 +50,7 @@ export class AdminPortalComponent implements OnInit {
     this.dataService.setlocation(sId, Number(vCount)).subscribe(response => {
       this.dataService.getLocationsAll().subscribe(response1 => {
         this.staRes = response1;
-        this.stations = this.staRes.locations;
+        this.stations = this.staRes;
       });
     });
   }

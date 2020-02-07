@@ -13,7 +13,7 @@ export class FeedbackListComponent {
   constructor(private dataService: DataService) {
     this.dataService.getFeedbackList().subscribe(response => {
       this.staRes = response;
-      this.feedbacks = this.staRes.feedbackList;
+      this.feedbacks = this.staRes;
     });
   }
 

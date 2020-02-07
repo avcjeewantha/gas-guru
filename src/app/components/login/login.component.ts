@@ -12,6 +12,7 @@ export class LoginComponent {
 
   invalidLogin: boolean;
   message: string;
+
   constructor(
     private router: Router,
     private authservice: AuthService,
@@ -28,19 +29,14 @@ export class LoginComponent {
   signIn(credentials) {
     this.authservice.login(credentials).subscribe(response => {
       if (response) {
-        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
-        const action = this.route.snapshot.queryParamMap.get('action');
-        const uriDec = decodeURIComponent(returnUrl);
-        if (returnUrl) {
-          this.router.navigateByUrl(uriDec);
-        } else {
-          this.router.navigate(['/']);
-        }
-
+        this.router.navigate(['/']);
       } else {
         this.invalidLogin = true;
         this.message = 'Invalid username or password';
       }
+    }, response => {
+      this.invalidLogin = true;
+      this.message = 'Invalid username or password';
     });
   }
 

@@ -18,14 +18,16 @@ export class FeedBackComponent {
 
   submitFeedBack() {
     if (this.feedback !== '' && this.feedback !== undefined) {
-      this.dataService.sendFeedback(this.feedback, Number(this.authService.currentUserId)).subscribe(response => {
-        this.res = response;
-        if (this.res.status === 200) {
+      this.dataService.sendFeedback(this.feedback, this.authService.currentUsername).subscribe(response => {
+        if (response) {
+          this.res = response;
           alert('Submitted!');
           this.dialogRef.close();
         } else {
-          alert('An error!');
+          alert('An error in submitting!');
         }
+      }, error => {
+
       });
     }
   }

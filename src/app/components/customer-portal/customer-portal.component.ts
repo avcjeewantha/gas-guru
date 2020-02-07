@@ -17,7 +17,7 @@ export class CustomerPortalComponent implements OnInit {
     this.getUserLocation();
     this.dataService.getLocationsAll().subscribe(response => {
       this.staRes = response;
-      this.stations = this.staRes.locations;
+      this.stations = this.staRes;
     });
   }
 
@@ -40,7 +40,7 @@ export class CustomerPortalComponent implements OnInit {
     this.set = false;
     this.dataService.getLocationsAll().subscribe(response => {
       this.staRes = response;
-      this.stations = this.staRes.locations;
+      this.stations = this.staRes;
       this.getUserLocation();
     });
   }

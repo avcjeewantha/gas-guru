@@ -86,7 +86,8 @@ export class RegistrationFormComponent implements OnInit {
       colorOfVehicle: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', Validators.required],
+      userType: 'customer'
     }, {
       validator: MustMatch('password', 'confirmPassword')
     });
@@ -105,12 +106,14 @@ export class RegistrationFormComponent implements OnInit {
     this.registerForm.controls.dateOfBirth.setValue(this.dob);
     this.dataService.register(this.registerForm.value).subscribe(response => {
       this.res = response;
-      if (this.res.status === 200) {
+      if (response) {
         alert('Successfully Registered!');
         this.close();
       } else {
         alert('Error in Registering!');
       }
+    }, error => {
+      alert('Error in Registering!');
     });
   }
 

@@ -68,7 +68,7 @@
 
         <div class="form-group col-4">
           <label>Tel.No.</label>
-          <input type="Number" formControlName="telNo" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.telNo.errors }" />
+          <input type="text" formControlName="telNo" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.telNo.errors }" />
           <div *ngIf="submitted && f.telNo.errors" class="invalid-feedback">
             <div *ngIf="f.telNo.errors.required">Tel.No. is required</div>
             <div *ngIf="f.telNo.errors.pattern && !f.telNo.errors.required">Tel.No. is incorrect</div>

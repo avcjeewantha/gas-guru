@@ -4,9 +4,9 @@
                 [latitude]="m.latitude"
                 [longitude]="m.longitude">
       <agm-info-window>
-                <h3><strong>{{m.sName}}</strong></h3>
-              count: <input class="foo" type="number"  size="10" placeholder="Vehicle count" [(ngModel)]="m.vCount" (keyup)="onKey(m.sId, m.vCount)">
-              status: <input [readOnly]=true class="foo" size="15" [value]="[getStatus(m.vCount)]">
+                <h3><strong>{{m.stationName}}</strong></h3>
+              count: <input class="foo" type="number"  size="10" placeholder="Vehicle count" [(ngModel)]="m.vehicleCount" (keyup)="onKey(m.stationId, m.vehicleCount)">
+              status: <input [readOnly]=true class="foo" size="15" [value]="[getStatus(m.vehicleCount)]">
       </agm-info-window>
     </agm-marker>
   </agm-map>

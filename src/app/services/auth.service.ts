@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {map} from 'rxjs/operators';
 import {JwtHelper, tokenNotExpired} from 'angular2-jwt';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {JwtHelperService} from '@auth0/angular-jwt';
+
 
 @Injectable()
 export class AuthService {
@@ -13,14 +14,16 @@ export class AuthService {
   ) { }
 
   login(credentials) {
-    return this.http.post(`${environment.apiUrl}/users/authenticate`, credentials)
+    return this.http.post(`${environment.apiUrl}/gasGuru/login`, credentials)
       .pipe(map(response => {
         this.result = response;
-        if (this.result.error === 0 && this.result.token) {
+        if (this.result.token) {
           localStorage.setItem('token', this.result.token);
-          return true;
+          return response;
         }
-        return false;
+        return response;
+      }, error => {
+        return error;
       }));
   }
 
@@ -49,7 +52,7 @@ export class AuthService {
     } else {
       const helper = new JwtHelperService();
       const decodedToken = helper.decodeToken(token);
-      return decodedToken.username;
+      return decodedToken.sub;
     }
   }
 
@@ -102,9 +105,4 @@ export class AuthService {
     return helper.decodeToken(token);
   }
 
-  register(data) {
-    return this.http.post(`${environment.apiUrl}/api/newapplication`, data).pipe(map(response => {
-      return !!response;
-    }));
-  }
 }

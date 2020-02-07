@@ -42,7 +42,9 @@ export class CustomerDetailsComponent {
 
   toDate(dob) {
     if (dob) {
-      const [year, month, day] = dob.split('-');
+      // tslint:disable-next-line:prefer-const
+      let [year, month, day] = dob.split('-');
+      day = (day.split('T', 1))[0];
       const obj = { year: Number(year), month: Number(month), day: Number(day.split(' ')[0].trim()) };
       this.model = obj;
     }

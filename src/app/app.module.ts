@@ -78,7 +78,7 @@ import { FeedbackListComponent } from './components/feedback-list/feedback-list.
     AuthService,
     DataService,
     // provider used to create fake backend
-    fakeBackendProvider,
+    // fakeBackendProvider,
     AdminAuthGuardService,
     CustomerAuthGuardService,
     AuthGuard
