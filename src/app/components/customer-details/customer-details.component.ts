@@ -35,7 +35,7 @@ export class CustomerDetailsComponent {
       username: [this.data.customerEntity.username]
     });
     this.imageUrl1 = this.data.customerEntity.photo;
-    this.imageUrl2 = this.data.customerEntity.photo;
+    this.imageUrl2 = this.data.customerEntity.photoOfVehicle;
     this.linkColor = this.data.customerEntity.colorOfVehicle;
     this.toDate(this.data.customerEntity.dateOfBirth);
   }
